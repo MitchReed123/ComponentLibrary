@@ -2,20 +2,18 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import _propTypes from "prop-types";
 
-type Varient = "contained" | "outlined" | "text" | "testing";
-type Size = "large" | "medium" | "small";
+//use for button later
+// type Varient = "contained" | "outlined" | "text" | "testing";
 // type Rounded = "rounded" | "normal";
+
+type Size = "large" | "medium" | "small";
 type CardType = "primary" | "secondary";
 interface IProps {
-  varient?: Varient;
   img?: any;
   headerText?: string;
   subText?: string;
   info?: string;
-  primary?: any;
-  secondary?: any;
   size?: Size;
-  //   rounded?: Rounded;
   cardtype?: CardType;
 }
 
@@ -68,30 +66,6 @@ const InnerContainer = styled.div`
   max-width: 80%;
 `;
 
-const Header = styled.h1`
-  margin: 0px;
-  color: #fff;
-  font-weight: 700;
-  //font size prop
-  font-size: 38px;
-`;
-
-const SubHeader = styled.h3`
-  margin: 10px 0px;
-  color: #000;
-  font-weight: 700;
-  //font size prop
-  font-size: 20px;
-`;
-
-const Text = styled.p`
-  margin: 0px;
-  color: #000;
-  font-weight: 500;
-  //font size prop
-  font-size: 15px;
-`;
-
 const SideImageContainer = styled.div`
   max-width: 55%;
   display: flex;
@@ -117,47 +91,14 @@ const Image = styled.div`
     filter: blur(0.5px);
   }
 `;
-const CardContainer = styled.div`
-  width: 550px;
-  height: 250px;
-  display: flex;
-  border-radius: 26px;
-  margin-top: 25px;
-  position: relative;
-  background: ${(props: IProps) =>
-    props.cardtype === "primary"
-      ? Gradients.primaryGradient
-      : props.cardtype === "secondary"
-      ? Gradients.secondaryGradient
-      : Gradients.defaultGradient};
-  @media screen and (max-width: 600px) {
-    display: none;
-  }
-`;
 
-const Card = ({
-  img,
-  headerText,
-  subText,
-  info,
-  varient,
-  primary,
-  secondary,
-  size,
-  //   rounded,
-  cardtype,
-}: IProps) => {
-  console.log(varient);
-  console.log(cardtype);
-  console.log(size);
-  //   console.log(rounded);
-
+const Card = ({ img, headerText, subText, info, size, cardtype }: IProps) => {
   const Header = styled.h1`
     margin: 0px;
     color: #fff;
     font-weight: 700;
     //font size prop
-    font-size: 38px;
+    font-size: 35px;
   `;
 
   const SubHeader = styled.h3`
@@ -168,12 +109,27 @@ const Card = ({
     font-size: 20px;
   `;
 
+  // font-size: ${(props) =>
+  //     props.large
+  //       ? FontSizes.large
+  //       : props.med
+  //       ? FontSizes.medium
+  //       : props.sm
+  //       ? FontSizes.small
+  //       : FontSizes.default};
+
   const Text = styled.p`
     margin: 0px;
     color: #000;
     font-weight: 500;
     //font size prop
-    font-size: 15px;
+    font-size: ${size === "large"
+      ? FontSizes.large
+      : size === "medium"
+      ? FontSizes.medium
+      : size === "small"
+      ? FontSizes.small
+      : FontSizes.default};
   `;
   const CardContainer = styled.div`
     width: 550px;
@@ -182,15 +138,15 @@ const Card = ({
     border-radius: 26px;
     margin-top: 25px;
     position: relative;
-    background: ${(props) =>
-      cardtype === "primary"
-        ? Gradients.primaryGradient
-        : cardtype === "secondary"
-        ? Gradients.secondaryGradient
-        : Gradients.defaultGradient};
-    @media screen and (max-width: 600px) {
+    background: ${cardtype === "primary"
+      ? Gradients.primaryGradient
+      : cardtype === "secondary"
+      ? Gradients.secondaryGradient
+      : Gradients.defaultGradient};
+    //this was for when i had a vertical card example
+    /* @media screen and (max-width: 600px) {
       display: none;
-    }
+    } */
   `;
 
   return (
@@ -199,14 +155,14 @@ const Card = ({
       <CardContainer>
         <DetailsContainer>
           <InnerContainer>
-            <Header>{headerText}</Header>
-            <SubHeader>{subText}</SubHeader>
-            <Text>{info}</Text>
+            <Header>Mitchell Reed</Header>
+            <SubHeader>Learning Assistant</SubHeader>
+            <Text>Teaching programming languages to students</Text>
           </InnerContainer>
         </DetailsContainer>
         <SideImageContainer>
           <Image>
-            <img src={img} />
+            <img src="https://images.unsplash.com/photo-1593642532781-03e79bf5bec2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzgyNTV8MXwxfGFsbHwxfHx8fHx8Mnx8MTYyMzMzNDA1NA&ixlib=rb-1.2.1&q=80&w=1080" />
           </Image>
         </SideImageContainer>
       </CardContainer>
